@@ -1,0 +1,21 @@
+.log-in {
+  color: black;
+  max-width: 400px;
+  padding: 30px;
+  justify-content: center;
+  margin: 20px auto auto;
+
+  .user-icon {
+    font-size: 54px;
+    margin-left: 43%;
+    color: #02024a;
+  }
+
+  .register-link {
+    color: black;
+  }
+
+  .register-link:hover {
+    color: #4285f4;
+  }
+}

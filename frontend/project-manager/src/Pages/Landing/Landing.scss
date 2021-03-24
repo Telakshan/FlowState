@@ -1,0 +1,49 @@
+.page {
+  .landing {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    text-align: center;
+    position: relative;
+    line-height: 70px;
+    color: black;
+
+    button {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .info-section {
+    color: black;
+    min-height: 70vh;
+    //background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .connect{
+        font-size: 54px;
+    }
+
+    .check{
+      margin-right: 5px;
+    }
+
+    .card {
+     // border: 1px solid black;
+      width: calc(33% - 20px);
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card > h3{
+      color: var(--theme-color);
+    }
+  }
+}
