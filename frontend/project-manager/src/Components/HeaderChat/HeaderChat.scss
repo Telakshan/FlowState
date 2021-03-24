@@ -1,3 +1,7 @@
-.header-chat{
-    
+.header-chat {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }

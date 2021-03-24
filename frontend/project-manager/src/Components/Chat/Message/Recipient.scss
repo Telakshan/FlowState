@@ -1,0 +1,24 @@
+.recipient-message{
+
+    position: relative;
+    font-size: 16px;
+    width: fit-content;
+    border-radius: 10px;
+    background-color: rgba(54, 162, 235, 0.2);
+    margin-bottom: 30px;
+    padding: 10px;
+
+    .user-name{
+        position: absolute;
+        top: -20px;
+        font-weight: 800;
+        font-size: small;
+    }
+
+
+    .chat-timestamp{
+        margin-left: 10px;
+        font-size: xx-small;
+    }
+
+}

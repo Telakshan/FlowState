@@ -6,12 +6,13 @@ import { FiFile } from "react-icons/fi";
 import { BsBookmark } from "react-icons/bs";
 import Input from "../Input/Input";
 import { IoMdArrowDropdown, IoMdAdd } from "react-icons/io";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
 import Button from "../Button/Button";
 import Dropdown from "../Dropdown/Dropdown";
 
 import "./Header.scss";
 import Modal from "../Modal/Modal";
+import HeaderChat from "../HeaderChat/HeaderChat";
 
 const Header = () => {
   const wrapper = useRef(null);
@@ -123,8 +124,10 @@ const Header = () => {
               <h3>Issues</h3>
             </NavLink>
             <div className="header_chats">
-              <p>Hmm</p>
-              <p>Hmm</p>
+              <HeaderChat />
+              <HeaderChat />
+              <HeaderChat />
+              <HeaderChat />
             </div>
           </li>
 
@@ -146,7 +149,7 @@ const Header = () => {
               className="file-browser bottom"
               onClick={() => setShowInviteModal(!showInviteModal)}
             >
-              <AiOutlineUserAdd className="icons" />
+              <AiOutlineUsergroupAdd className="icons" />
               <p>Add Members</p>
             </NavLink>
           </li>

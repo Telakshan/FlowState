@@ -1,3 +1,4 @@
+import {useState, useCallback} from 'react';
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import Header from "./Components/Header/Header";
@@ -11,6 +12,11 @@ import {
 } from "react-router-dom";
 
 function App() {
+
+  const [token, setToken] = useState(false);
+  const [userId, setUserId] = useState(null);
+
+
   return (
     <div>
       <Router>
@@ -20,6 +26,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path='/chat' component={Chat}/>
+          <Redirect to='/'/>
         </Switch>
       </Router>
     </div>

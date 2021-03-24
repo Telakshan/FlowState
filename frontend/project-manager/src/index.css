@@ -14,9 +14,14 @@ body {
 
 }
 
+html, body{
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 html{
   color: #fff;
-
+  margin: 0;
 }
 
 a{

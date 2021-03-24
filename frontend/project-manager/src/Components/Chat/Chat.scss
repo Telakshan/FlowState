@@ -1,7 +1,92 @@
-.chat{
+.chat {
+  display: flex;
+  color: black;
+  flex-direction: column;
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .header {
+    padding: 10px;
+
+    .header-info {
+      margin-bottom: 10px;
+      margin-left: 10%;
+    }
+
+    .header-right {
+      margin-left: 10%;
+    }
+
+    .header-right > * {
+      font-size: larger;
+      padding: 6px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .header-right > *:hover {
+      background-color: lightgray;
+    }
+
+    border-bottom: 1px solid lightgray;
+  }
+
+  .chat-body {
     display: flex;
-    flex-direction: column;
-    flex: 0.65;
-    margin-left: 10%;
-    color: black;
+    margin: 20px auto auto;
+    padding: 2%;
+    top: 23vh;
+
+    .center-div {
+      width: 80vh;
+      justify-content: center;
+
+      .recipient {
+        margin-left: 40%;
+      }
+    }
+
+    p {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .chat {
+    height: 100%;
+
+    .chat-body {
+      width: 100%;
+      height: 100%;
+      padding: 2px;
+
+      .center-div {
+        .recipient {
+          margin-left: 20%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 480px) and (max-width: 1200px) {
+  .chat {
+    .chat-body {
+      width: 80%;
+      padding: 2px;
+
+      .center-div {
+        .recipient {
+          margin-left: 29%;
+        }
+      }
+    }
+  }
 }
