@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { MdAccountCircle } from "react-icons/md";
+import { AuthContext } from "../../Context/AuthContext";
+import { useHttpClient } from "../../Hooks/Httphook";
+
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 
@@ -13,11 +16,34 @@ const Login = () => {
     password: "",
   });
 
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
   const { email, password } = formData;
 
-  const handleChange = (event) => {
-    const { value, name } = event.target;
+  const auth = useContext(AuthContext);
 
+  const submitLogin  = async (event) => {
+    event.preventDefault();
+    try {
+      const responseData = await sendRequest(
+        'http://localhost:5000/api/user/login',
+        'POST',
+        JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        }),
+        {
+          'Content-Type': 'application/json'
+        }
+      );
+      auth.login(responseData.user.id);
+      
+    } catch (error) {
+      
+    }
+  }
+
+  const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
@@ -26,7 +52,7 @@ const Login = () => {
       <MdAccountCircle className="user-icon" />
       <h2 className="title">Log in</h2>
 
-      <form>
+      <form onSubmit={submitLogin}>
         <Input
           name="email"
           value={email}

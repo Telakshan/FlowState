@@ -6,19 +6,19 @@ import "./Dropdown.scss";
 const Dropdown = () => {
   return (
     <div className="cart-dropdown">
-      <Link exact to="/login" className="link">
+      <Link to="/login" className="link">
         My Account
       </Link>
 
-      <Link exact to="/login" className="link">
+      <Link to="/login" className="link">
         Log in
       </Link>
 
-      <Link exact to="/register" className="link">
+      <Link to="/register" className="link">
         Register
       </Link>
 
-      <Link exact to="/help" className="link">
+      <Link to="/help" className="link">
         Help
       </Link>
 

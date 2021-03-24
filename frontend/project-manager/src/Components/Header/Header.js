@@ -95,7 +95,7 @@ const Header = () => {
       <NavLink to="#" className="menu-bars">
         <HiMenuAlt2 onClick={showSideBar} />
       </NavLink>
-      <h4 className="title">Project Manager</h4>
+      <h4 className="title">Flow State</h4>
       <MdAccountCircle
         className="account"
         onClick={() => setDropDown(!dropDown)}
