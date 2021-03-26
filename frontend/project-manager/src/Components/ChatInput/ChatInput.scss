@@ -1,44 +1,41 @@
-.form{
-    display: flex;
-    border-radius: 5px;
-    margin: 0 auto auto;
-    background-color: antiquewhite;
-    border: 1px solid lightgrey;
+.form {
+  display: flex;
+  border-radius: 5px;
+  margin: 0 auto auto;
+  background-color: antiquewhite;
+  border: 1px solid lightgrey;
 
-    .input{
-        border: none;
-        border-radius: 0;
-        width: 100%;
-        padding-left: 5px;
-    }
+  .input {
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    padding-left: 5px;
+  }
 
-    .icon{
-        font-size: 24px;
-        margin-left: 5px;
-        margin-top: 16px;
-        border-radius: 50%;
-        padding: 4px;
-    }
+  .icon {
+    font-size: 24px;
+    margin-left: 5px;
+    margin-top: 16px;
+    border-radius: 50%;
+    padding: 4px;
+  }
 
-    .icon:hover{
-        cursor: pointer;
-    }
+  .icon:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+  }
 
-    .attachment{
-        font-size: 18px;
-        margin-left: 5px;
-        margin-top: 17px;
-        margin-right: 5px;
-        border-radius: 50%;
-        padding: 6px;
-    }
+  .attachment {
+    font-size: 18px;
+    margin-left: 5px;
+    margin-top: 17px;
+    margin-right: 5px;
+    border-radius: 50%;
+    padding: 6px;
+  }
 
-    .attachment:hover{
-        cursor: pointer;
-        //background-color: lightgrey;
-    }
-
-    
-
-   
+  .attachment:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+  }
 }

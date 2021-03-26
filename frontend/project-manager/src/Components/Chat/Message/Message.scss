@@ -1,24 +1,21 @@
-.chat-message{
+.message {
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgray;
+  background-color:  rgba(54, 162, 235, 0.2);
 
-    position: relative;
-    font-size: 16px;
-    width: fit-content;
-    border-radius: 10px;
-    border: 1px solid lightgrey;
-    margin-bottom: 30px;
-    padding: 10px;
+  h4 {
+    margin: 2px 0px 5px 2px;
+  }
 
-    .user-name{
-        position: absolute;
-        top: -20px;
-        font-weight: 800;
-        font-size: small;
+  .message-info {
+    padding-left: 15px;
+
+    .message-timestamp {
+      color: gray;
+      font-weight: 300;
+      font-size: 13px;
+      margin-left: 5px;
     }
-
-
-    .chat-timestamp{
-        margin-left: 10px;
-        font-size: xx-small;
-    }
-
+  }
 }

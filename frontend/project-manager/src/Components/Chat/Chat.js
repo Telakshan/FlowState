@@ -5,7 +5,6 @@ import { FiUsers } from "react-icons/fi";
 import Message from "./Message/Message";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import "./Chat.scss";
-import Recipient from "./Message/Recipient";
 import ChatInput from "../ChatInput/ChatInput";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Modal from "../Modal/Modal";
@@ -82,56 +81,25 @@ const Chat = () => {
             onClick={() => setAddShowUserModal(!showAddUserModal)}
           />
           <BsSearch onClick={() => setSearchModal(!searchModal)} />
-          {searchModal ? <React.Fragment><SearchModal /><AiFillCloseCircle className="close" onClick={() => setSearchModal(!searchModal)}/></React.Fragment> : null}{" "}
-          
+          {searchModal ? (
+            <React.Fragment>
+              <SearchModal />
+              <AiFillCloseCircle
+                className="close"
+                onClick={() => setSearchModal(!searchModal)}
+              />
+            </React.Fragment>
+          ) : null}{" "}
         </div>
       </div>
 
       <div className="chat-body">
         <div className="center-div">
-          <div className="sender">
-            <Message />
-          </div>
-          <div className="recipient">
-            <Recipient />
-          </div>
-          {/*DELETE BELOW */}
-          <div className="sender">
-            <Message />
-          </div>
-          <div className="recipient">
-            <Recipient />
-          </div>{" "}
-          <div className="sender">
-            <Message />
-          </div>
-          <div className="recipient">
-            <Recipient />
-          </div>{" "}
-          <div className="sender">
-            <Message />
-          </div>
-          <div className="recipient">
-            <Recipient />
-          </div>{" "}
-          <div className="sender">
-            <Message />
-          </div>
-          <div className="recipient">
-            <Recipient />
-          </div>{" "}
-          <div className="sender">
-            <Message />
-          </div>
-          <div className="recipient">
-            <Recipient />
-          </div>{" "}
-          <div className="sender">
-            <Message />
-          </div>
-          <div className="recipient">
-            <Recipient />
-          </div>
+          <Message user={"Adam Wong"} message={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."} />
+          <Message user={"Adam Wong"} message={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."} />
+          <Message user={"Adam Wong"} message={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."} />
+          <Message user={"Adam Wong"} message={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."} />
+          <Message user={"Adam Wong"} message={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."} /> 
           <div className="chat-input">
             <ChatInput />
           </div>

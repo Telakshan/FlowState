@@ -2,13 +2,18 @@ import React from "react";
 
 import "./Message.scss";
 
-const Message = () => {
+const Message = ({ message, timestamp, user }) => {
   return (
-    <p className="chat-message">
-      <span className="user-name">Adam Wong</span>
-      This is a message
-      <span className="chat-timestamp">{new Date().toUTCString()}</span>
-    </p>
+    <div className="message">
+      <div className="message-info">
+        <h4>
+          {user}
+          <span className="message-timestamp">{new Date().toUTCString()}</span>
+        </h4>
+
+        <p>{message}</p>
+      </div>
+    </div>
   );
 };
 
