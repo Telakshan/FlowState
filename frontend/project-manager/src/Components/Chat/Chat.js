@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { GrAttachment } from "react-icons/gr";
 import { FiUsers } from "react-icons/fi";
@@ -7,6 +7,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import "./Chat.scss";
 import Recipient from "./Message/Recipient";
 import ChatInput from "../ChatInput/ChatInput";
+import { AiFillCloseCircle } from "react-icons/ai";
 import Modal from "../Modal/Modal";
 import Button from "../Button/Button";
 import SearchModal from "../Search/SearchModal";
@@ -24,7 +25,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="chat" >
+    <div className="chat">
       <Modal
         className="small-modal"
         show={showModal}
@@ -81,16 +82,12 @@ const Chat = () => {
             onClick={() => setAddShowUserModal(!showAddUserModal)}
           />
           <BsSearch onClick={() => setSearchModal(!searchModal)} />
-          {searchModal ? <SearchModal /> : null}
+          {searchModal ? <React.Fragment><SearchModal /><AiFillCloseCircle className="close" onClick={() => setSearchModal(!searchModal)}/></React.Fragment> : null}{" "}
+          
         </div>
       </div>
 
       <div className="chat-body">
-        {/* <p className="chat-message">
-          <span className="user-name">Adam Wong</span>
-          This is a message
-          <span className="chat-timestamp">{new Date().toUTCString()}</span>
-        </p> */}
         <div className="center-div">
           <div className="sender">
             <Message />

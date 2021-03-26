@@ -28,8 +28,15 @@
     }
 
     .header-right {
+      display: flex;
       margin-left: 10%;
+
+      .close{
+        margin-top: 4px;
+      }
     }
+
+    
 
     .header-right > * {
       font-size: larger;
@@ -51,20 +58,21 @@
     padding: 2%;
     max-height: 70vh;
     overflow-y: scroll;
+    //flex: 1;
 
     .center-div {
-      width: 80vh;
+      width: 100vh;
       justify-content: center;
 
       .chat-input {
         bottom: 0vh;
         position: absolute;
-        width: 86vh;
+        width: 100vh;
         margin: 0 auto auto;
       }
 
       .recipient {
-        margin-left: 53%;
+        margin-left: 60%;
       }
 
       .sender {
@@ -128,7 +136,7 @@
         }
 
         .recipient {
-          margin-left: 29%;
+          margin-left: 45%;
         }
       }
     }
