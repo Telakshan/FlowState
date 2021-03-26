@@ -2,19 +2,21 @@
     display: flex;
     border: 1px solid #D3D3D3;
     border-radius: 5px;
+    margin: 0 auto auto;
+    background-color: antiquewhite;
 
     .input{
         border: none;
         border-radius: 0;
-        padding: 30px;
-        width: 70%;
+        padding: 20px;
+        width: 82%;
         font-size: 1em;
     }
 
     .icon{
         font-size: 24px;
         margin-left: 5px;
-        margin-top: 30px;
+        margin-top: 16px;
         border-radius: 50%;
         padding: 4px;
     }
@@ -27,7 +29,7 @@
     .attachment{
         font-size: 18px;
         margin-left: 5px;
-        margin-top: 32px;
+        margin-top: 17px;
         border-radius: 50%;
         padding: 6px;
     }

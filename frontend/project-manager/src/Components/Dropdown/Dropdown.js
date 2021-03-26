@@ -25,6 +25,7 @@ const Dropdown = () => {
       <Link to="/" className="link">
         Info
       </Link>
+      
     </div>
   );
 };

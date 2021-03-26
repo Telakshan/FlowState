@@ -3,6 +3,14 @@
   color: black;
   flex-direction: column;
 
+  // .chat-input{
+  //   bottom: 0vh;
+  //   margin: 0 auto auto;
+  //   position: absolute;
+  //   width: 86vh;
+  //   z-index: 1;
+  // }
+
   h2 {
     margin: 0;
   }
@@ -12,7 +20,7 @@
   }
 
   .header {
-    padding: 10px;
+    padding: 3px;
 
     .header-info {
       margin-bottom: 10px;
@@ -39,16 +47,28 @@
 
   .chat-body {
     display: flex;
-    margin: 20px auto auto;
+    margin: 5px auto auto;
     padding: 2%;
-    top: 23vh;
+    max-height: 70vh;
+    overflow-y: scroll;
 
     .center-div {
       width: 80vh;
       justify-content: center;
 
+      .chat-input {
+        bottom: 0vh;
+        position: absolute;
+        width: 86vh;
+        margin: 0 auto auto;
+      }
+
       .recipient {
-        margin-left: 40%;
+        margin-left: 53%;
+      }
+
+      .sender {
+        margin-left: auto;
       }
     }
 
@@ -62,12 +82,25 @@
   .chat {
     height: 100%;
 
+    // .chat-input{
+    //   width: 50vh;
+    // }
+
     .chat-body {
-      width: 100%;
+      width: 70%;
       height: 100%;
       padding: 2px;
 
       .center-div {
+        margin: 0 auto auto;
+
+        .chat-input {
+          bottom: 0vh;
+          position: absolute;
+          width: fit-content;
+          margin: 0 auto auto;
+        }
+
         .recipient {
           margin-left: 20%;
         }
@@ -79,10 +112,21 @@
 @media (min-width: 480px) and (max-width: 1200px) {
   .chat {
     .chat-body {
-      width: 80%;
+      width: 70%;
       padding: 2px;
 
       .center-div {
+        margin: 0 auto auto;
+
+
+
+        .chat-input {
+          bottom: 0vh;
+          position: absolute;
+          width: 61%;
+          margin: 0 auto auto;
+        }
+
         .recipient {
           margin-left: 29%;
         }

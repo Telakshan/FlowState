@@ -5,11 +5,11 @@ import { MdAccountCircle } from "react-icons/md";
 import { FiFile } from "react-icons/fi";
 import { BsBookmark } from "react-icons/bs";
 import Input from "../Input/Input";
+
 import { IoMdArrowDropdown, IoMdAdd } from "react-icons/io";
-import { AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import Button from "../Button/Button";
 import Dropdown from "../Dropdown/Dropdown";
-
 import "./Header.scss";
 import Modal from "../Modal/Modal";
 import HeaderChat from "../HeaderChat/HeaderChat";
@@ -21,7 +21,8 @@ const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [issue, setIssue] = useState("");
-  const [invite, setInvite] = useState('');
+  const [invite, setInvite] = useState("");
+
   const showSideBar = () => setSideBar(!sideBar);
 
   useEffect(() => {
@@ -84,14 +85,13 @@ const Header = () => {
         }
       >
         <Input
-          label='Invitee email'
-          name='invite'
+          label="Invitee email"
+          name="invite"
           value={invite}
           onChange={(e) => onChange(e)}
           required
           small={true}
-        >
-        </Input>
+        ></Input>
       </Modal>
       <NavLink to="#" className="menu-bars">
         <HiMenuAlt2 onClick={showSideBar} />
@@ -140,7 +140,6 @@ const Header = () => {
               <IoMdAdd className="icons" />
               <p>Add Issues</p>
             </NavLink>
-            
           </li>
 
           <li>

@@ -8,10 +8,12 @@ const ChatInput = () => {
   return (
     <form className="form">
       <input className="input" placeholder="Enter message here..." />
-        <IoIosSend className='icon'/> 
+        <IoIosSend className='icon'/>
         <GrAttachment className='attachment'/>
 
     </form>
+
+  
   );
 };
 
