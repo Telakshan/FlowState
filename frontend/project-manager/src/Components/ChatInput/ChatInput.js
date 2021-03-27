@@ -4,6 +4,12 @@ import { IoIosSend } from "react-icons/io";
 
 import "./ChatInput.scss";
 
+const sendMessage = (e) => {
+  e.preventDefault();
+
+  
+}
+
 const ChatInput = () => {
   return (
     <form className="form">
@@ -18,3 +24,9 @@ const ChatInput = () => {
 };
 
 export default ChatInput;
+
+//ethnically diverse and vibrant city
+//much more affordable housing
+//i have extended family in the mid western states of MI and Illinois. 
+//Winter is great, ny doesnt have any more winters. i look forward to the 4 seasons.
+//

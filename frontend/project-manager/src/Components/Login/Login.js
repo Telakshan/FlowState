@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { MdAccountCircle } from "react-icons/md";
 import { AuthContext } from "../../Context/AuthContext";
-import { useHttpClient } from "../../Hooks/Httphook";
+import axios from "axios";
+import Loading from "../Loading/Loading";
 
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
@@ -16,32 +17,34 @@ const Login = () => {
     password: "",
   });
 
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { email, password } = formData;
 
   const auth = useContext(AuthContext);
 
-  const submitLogin  = async (event) => {
+  const submitLogin = async (event) => {
     event.preventDefault();
+    const { email, password } = formData;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ email, password });
+    setIsLoading(true);
     try {
-      const responseData = await sendRequest(
-        'http://localhost:5000/api/user/login',
-        'POST',
-        JSON.stringify({
-          email: formData.email,
-          password: formData.password
-        }),
-        {
-          'Content-Type': 'application/json'
-        }
+      const responseData = await axios.post(
+        "http://localhost:5000/api/user/login",
+        body,
+        config
       );
-      auth.login(responseData.user.id);
-      
+      auth.login(responseData.data.userId, responseData.data.token);
+      setIsLoading(false);
     } catch (error) {
-      
+      console.error(error, "Log in failed");
     }
-  }
+  };
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -49,6 +52,7 @@ const Login = () => {
 
   return (
     <div className="log-in">
+      {isLoading ? <Loading /> : null}
       <MdAccountCircle className="user-icon" />
       <h2 className="title">Log in</h2>
 

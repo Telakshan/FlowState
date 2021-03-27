@@ -2,36 +2,44 @@ import React, { useContext, useState } from "react";
 import Button from "../Button/Button";
 import { MdAccountCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { useHttpClient } from "../../Hooks/Httphook";
 import { AuthContext } from "../../Context/AuthContext";
+import axios from "axios";
 import Input from "../Input/Input";
 import Loading from "../Loading/Loading";
 
 import "./Register.scss";
 
 const Register = () => {
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { email, password } = formData;
+  const { name, email, password } = formData;
 
   const auth = useContext(AuthContext);
 
   const authSubmit = async (event) => {
     event.preventDefault();
+    const { name, email, password } = formData;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const body = JSON.stringify({ name, email, password });
+    setIsLoading(true);
     try {
-      const form = new FormData();
-      form.append("email", formData.email);
-      form.append("password", formData.password);
-      const responseData = await sendRequest(
-        "http://localhost:5001/api/user/register",
-        "POST",
-        form
+      const responseData = await axios.post(
+        "http://localhost:5000/api/user/register",
+        body, 
+        config
       );
-      auth.login(responseData.userId, responseData.token);
+      auth.login(responseData.data.userId, responseData.data.token);
+      setIsLoading(false);
     } catch (error) {
       console.error(error, "Register failed");
     }
@@ -47,6 +55,14 @@ const Register = () => {
       <h2 className="title">Sign up</h2>
 
       <form onSubmit={authSubmit}>
+        <Input
+          name="name"
+          type="text"
+          value={name}
+          label="full name"
+          onChange={handleChange}
+          required
+        />
         <Input
           name="email"
           type="email"
