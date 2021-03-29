@@ -15,12 +15,32 @@ import Modal from "../Modal/Modal";
 import HeaderChat from "../HeaderChat/HeaderChat";
 
 const Header = () => {
+  const dummy_issues = [
+    {
+      name: "Project # 1",
+      id: "random_id",
+    },
+    {
+      name: "Project # 2",
+      id: "random_id",
+    },
+    {
+      name: "Project # 3",
+      id: "random_id",
+    },
+    {
+      name: "Project # 4",
+      id: "random_id",
+    }
+  ];
+
   const wrapper = useRef(null);
   const [sideBar, setSideBar] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showInviteModal, setShowInviteModal] = useState(false);
-  const [issue, setIssue] = useState("");
+  const [issues, setIssue] = useState([]);
+  const [issueName, setIssueName] = useState("");
   const [invite, setInvite] = useState("");
 
   const showSideBar = () => setSideBar(!sideBar);
@@ -31,6 +51,10 @@ const Header = () => {
       document.removeEventListener("click", handleClickOutside, false);
     };
   }, []);
+
+  useEffect(() => {
+    setIssue(dummy_issues);
+  });
 
   const handleClickOutside = (event) => {
     if (wrapper.current && !wrapper.current.contains(event.target)) {
@@ -66,7 +90,7 @@ const Header = () => {
         <Input
           label="Issue name"
           name="issue"
-          value={issue}
+          value={issueName}
           onChange={(e) => onChange(e)}
           required
           small={true}
@@ -124,10 +148,9 @@ const Header = () => {
               <h3>Issues</h3>
             </NavLink>
             <div className="header_chats">
-              <HeaderChat />
-              <HeaderChat />
-              <HeaderChat />
-              <HeaderChat />
+              {issues.map((issue) => (
+                <HeaderChat name={issue.name} id={issue.id} />
+              ))}
             </div>
           </li>
 

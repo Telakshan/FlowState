@@ -1,15 +1,16 @@
 .message {
   display: flex;
   align-items: center;
-  border: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
   background-color:  rgba(54, 162, 235, 0.2);
+  opacity: 0.7;
 
   &:hover{
-      opacity: 0.7;
+      opacity: 1;
   }
 
   h4 {
-    margin: 2px 0px 5px 2px;
+    margin: 5px 2px 5px 2px;
   }
 
   .message-info {
