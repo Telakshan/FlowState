@@ -177,7 +177,9 @@ const Chat = () => {
     );
   }
 
- 
+  const addRoom = () => {
+    
+  }
 
   const { roomId } = useParams();
   const [showModal, setShowModal] = useState(false);
@@ -190,7 +192,7 @@ const Chat = () => {
   useEffect(() => {
     setRoomMessages(messages);
     setRoomDetails(dummyRoomDetails);
-  });
+  }, [roomId]);
 
   const cancelModal = () => {
     setShowModal(false);
@@ -274,7 +276,7 @@ const Chat = () => {
             <Message message={message} user={user} />
           ))}
           <div className="chat-input">
-            <ChatInput />
+            <ChatInput roomId={roomId}/>
           </div>
         </div>
       </div>

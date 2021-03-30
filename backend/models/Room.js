@@ -1,11 +1,27 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
 const RoomSchema = new Schema({
-    name: {type: String, required: true},
-    users: [{type: mongoose.Types.ObjectId, required: truee, ref: 'User'}],
-    messages: [{type: mongoose.Types.ObjectId, ref: 'Message'}]
+  name: { type: String, required: true },
+  messages: [
+    {
+      name: {
+        type: String,
+      },
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+      },
+      text: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
 });
 
-module.exports = mongoose.model('Room', RoomSchema);
+module.exports = mongoose.model("Room", RoomSchema);

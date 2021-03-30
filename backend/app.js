@@ -1,6 +1,8 @@
 const express = require("express");
 const userRoutes = require("./routes/user-routes");
+const roomRoutes = require('./routes/room-routes');
 const connectDB = require('./config/db');
+const pusher = require('pusher');
 const HttpError = require("./models/HttpError");
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -24,6 +26,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/user', userRoutes);
+app.use('/api/room', roomRoutes);
 app.use((req, res, next) => {
   throw new HttpError('Route does not exist', 404);
 })

@@ -54,7 +54,7 @@ const Header = () => {
 
   useEffect(() => {
     setIssue(dummy_issues);
-  });
+  }, []);
 
   const handleClickOutside = (event) => {
     if (wrapper.current && !wrapper.current.contains(event.target)) {
