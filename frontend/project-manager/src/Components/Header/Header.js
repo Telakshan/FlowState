@@ -3,7 +3,7 @@ import { NavLink, BrowserRouter as Router } from "react-router-dom";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { MdAccountCircle } from "react-icons/md";
 import { FiFile } from "react-icons/fi";
-import { BsBookmark } from "react-icons/bs";
+import { BsBookmark } from "react-icons/bs"; 
 import Input from "../Input/Input";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
@@ -28,7 +28,7 @@ const Header = () => {
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [issues, setIssue] = useState([]);
   const [issueName, setIssueName] = useState("");
-  const [invite, setInvite] = useState("");
+  const [inviteEmail, setInvite] = useState("");
   const auth = useContext(AuthContext);
 
   const showSideBar = () => setSideBar(!sideBar);
@@ -100,13 +100,13 @@ const Header = () => {
         "Content-Type": "application/json",
       },
     };
-    const body = JSON.stringify({ invite });
+    const body = JSON.stringify({ inviteEmail });
     try {
       await axios.post("http://localhost:5000/api/invite", body, config);
-      setShowModal(false);
     } catch (error) {
       console.error(error, "Cannot send message");
     }
+    setShowInviteModal(false);
   };
 
   return (
@@ -147,7 +147,7 @@ const Header = () => {
         <Input
           label="Invitee email"
           name="invite"
-          value={invite}
+          value={inviteEmail}
           onChange={(e) => onSetEmail(e)}
           required
         ></Input>
