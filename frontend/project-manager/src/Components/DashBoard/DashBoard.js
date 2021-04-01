@@ -3,6 +3,10 @@ import { AuthContext } from "../../Context/AuthContext";
 import "./DashBoard.scss";
 
 const DashBoard = () => {
+
+  const getUsers = () => {
+    
+  }
   const auth = useContext(AuthContext);
   return (
     <div className="dashboard">

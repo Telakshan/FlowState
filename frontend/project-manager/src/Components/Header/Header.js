@@ -6,7 +6,7 @@ import { FiFile } from "react-icons/fi";
 import { BsBookmark } from "react-icons/bs";
 import Input from "../Input/Input";
 import axios from "axios";
-import {AuthContext} from '../../Context/AuthContext';
+import { AuthContext } from "../../Context/AuthContext";
 import { IoMdArrowDropdown, IoMdAdd } from "react-icons/io";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import Button from "../Button/Button";
@@ -14,10 +14,10 @@ import Dropdown from "../Dropdown/Dropdown";
 import "./Header.scss";
 import Modal from "../Modal/Modal";
 import HeaderChat from "../HeaderChat/HeaderChat";
-import Pusher from 'pusher-js';
+import Pusher from "pusher-js";
 
-const pusher = new Pusher('5001586ab8cef267004c', {
-  cluster: 'us2'
+const pusher = new Pusher("5001586ab8cef267004c", {
+  cluster: "us2",
 });
 
 const Header = () => {
@@ -43,10 +43,10 @@ const Header = () => {
   useEffect(() => {
     getIssueList();
 
-    const channel = pusher.subscribe('issues');
-    channel.bind('newIssue', function(data){
+    const channel = pusher.subscribe("issues");
+    channel.bind("newIssue", function (data) {
       getIssueList();
-    })
+    });
   }, []);
 
   const handleClickOutside = (event) => {
@@ -63,6 +63,10 @@ const Header = () => {
 
   const onChange = (e) => {
     setIssueName(e.target.value);
+  };
+
+  const onSetEmail = (e) => {
+    setInvite(e.target.value);
   };
 
   const getIssueList = () => {
@@ -87,6 +91,21 @@ const Header = () => {
       setShowModal(false);
     } catch (error) {
       console.error(error, "Error creating issue");
+    }
+  };
+
+  const sendEmail = async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ invite });
+    try {
+      await axios.post("http://localhost:5000/api/invite", body, config);
+      setShowModal(false);
+    } catch (error) {
+      console.error(error, "Cannot send message");
     }
   };
 
@@ -121,7 +140,7 @@ const Header = () => {
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
-            <Button>Invite</Button>
+            <Button onClick={sendEmail}>Invite</Button>
           </React.Fragment>
         }
       >
@@ -129,7 +148,7 @@ const Header = () => {
           label="Invitee email"
           name="invite"
           value={invite}
-          onChange={(e) => onChange(e)}
+          onChange={(e) => onSetEmail(e)}
           required
         ></Input>
       </Modal>
@@ -158,13 +177,17 @@ const Header = () => {
               <h3>Issues</h3>
             </NavLink>
             <div className="header_chats">
-              {issues.map((issue) => (
-                <HeaderChat
-                  key={issue.id}
-                  name={issue.issueName}
-                  id={issue.id}
-                />
-              ))}
+              {auth.isLoggedIn ? (
+                issues.map((issue) => (
+                  <HeaderChat
+                    key={issue.id}
+                    name={issue.issueName}
+                    id={issue.id}
+                  />
+                ))
+              ) : (
+                <p>No Issues added</p>
+              )}
             </div>
           </li>
 

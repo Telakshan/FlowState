@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
@@ -26,7 +26,6 @@ const Chat = () => {
   const [searchModal, setSearchModal] = useState(false);
   const [roomDetails, setRoomDetails] = useState("");
   const [roomMessages, setRoomMessages] = useState([]);
-  const fieldRef = useRef(null);
 
   const getMessages = () => {
     axios.get(`http://localhost:5000/api/room/${roomId}`).then((res) => {
@@ -44,9 +43,6 @@ const Chat = () => {
         getMessages();
       });
     }
-    // if (fieldRef && fieldRef.current) {
-    //   fieldRef.current.scrollIntoView();
-    // }
   }, [roomId]);
 
   const cancelModal = () => {
@@ -110,7 +106,7 @@ const Chat = () => {
         </div>
       </div>
 
-      <div className="chat-body" ref={fieldRef}>
+      <div className="chat-body">
         <div className="center-div">
           {roomMessages.map(({ text, name, id, date }) => (
             <Message key={id} message={text} user={name} date={date} />
