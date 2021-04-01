@@ -3,7 +3,6 @@ import { GrAttachment } from "react-icons/gr";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { IoIosSend } from "react-icons/io";
-import Input from "../Input/Input";
 
 import "./ChatInput.scss";
 
@@ -13,6 +12,7 @@ const ChatInput = ({ roomId }) => {
 
   const sendMessage = async (event) => {
     event.preventDefault();
+  
     const userId = auth.userId;
     const config = {
       headers: {
@@ -20,7 +20,6 @@ const ChatInput = ({ roomId }) => {
       },
     };
     const body = JSON.stringify({ message, userId });
-    console.log(body);
 
     try {
       await axios.post(
@@ -31,10 +30,11 @@ const ChatInput = ({ roomId }) => {
     } catch (error) {
       console.log(error, "Message not sent");
     }
+    setMessage("");
   };
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={sendMessage}>
       <input
         className="input"
         placeholder="Enter message here..."
@@ -43,7 +43,8 @@ const ChatInput = ({ roomId }) => {
         onChange={(e) => setMessage(e.target.value)}
         required
       />
-      <IoIosSend className="icon" onClick={sendMessage} />
+      {/* <IoIosSend className="icon" onClick={sendMessage} /> */}
+      <button type="submit">Send</button>
       <GrAttachment className="attachment" />
     </form>
   );

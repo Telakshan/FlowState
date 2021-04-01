@@ -3,8 +3,10 @@ import { MdAccountCircle } from "react-icons/md";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import Loading from "../Loading/Loading";
-
+import Chat from "../Chat/Chat";
+import DashBoard from "../DashBoard/DashBoard";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
 import { Link } from "react-router-dom";
 
 import Input from "../Input/Input";
@@ -18,6 +20,7 @@ const Login = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const { email, password } = formData;
 
@@ -40,9 +43,15 @@ const Login = () => {
         config
       );
       auth.login(responseData.data.userId, responseData.data.token);
+      setFormData({
+        email: "",
+        password: "",
+      });
       setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.error(error, "Log in failed");
+      setError(true);
     }
   };
 
@@ -50,12 +59,30 @@ const Login = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  const cancelModal = () => {
+    setError(false);
+  };
+
+  if (auth.isLoggedIn) {
+    return <Chat />;
+  }
+
   return (
     <div className="log-in">
       {isLoading ? <Loading /> : null}
       <MdAccountCircle className="user-icon" />
       <h2 className="title">Log in</h2>
-
+      {error && (
+        <Modal
+          // className="small-modal"
+          show={setError}
+          header="Log in Error"
+          onCancel={cancelModal}
+          footer={<Button onClick={cancelModal}>Close</Button>}
+        >
+          Cannot log you in. Please try again
+        </Modal>
+      )}
       <form onSubmit={submitLogin}>
         <Input
           name="email"

@@ -5,7 +5,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { FiFile } from "react-icons/fi";
 import { BsBookmark } from "react-icons/bs";
 import Input from "../Input/Input";
-
+import axios from "axios";
 import { IoMdArrowDropdown, IoMdAdd } from "react-icons/io";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import Button from "../Button/Button";
@@ -15,25 +15,6 @@ import Modal from "../Modal/Modal";
 import HeaderChat from "../HeaderChat/HeaderChat";
 
 const Header = () => {
-  const dummy_issues = [
-    {
-      name: "Project # 1",
-      id: "random_id",
-    },
-    {
-      name: "Project # 2",
-      id: "random_id",
-    },
-    {
-      name: "Project # 3",
-      id: "random_id",
-    },
-    {
-      name: "Project # 4",
-      id: "random_id",
-    }
-  ];
-
   const wrapper = useRef(null);
   const [sideBar, setSideBar] = useState(false);
   const [dropDown, setDropDown] = useState(false);
@@ -53,7 +34,7 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    setIssue(dummy_issues);
+    getIssueList();
   }, []);
 
   const handleClickOutside = (event) => {
@@ -69,7 +50,31 @@ const Header = () => {
   };
 
   const onChange = (e) => {
-    setIssue(e.target.value);
+    setIssueName(e.target.value);
+  };
+
+  const getIssueList = () => {
+    axios.get("http://localhost:5000/api/room/").then((res) => {
+      setIssue(res.data.issues);
+    });
+  };
+
+  const addIssue = async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ issueName });
+    try {
+      await axios.post(
+        "http://localhost:5000/api/room/createissue",
+        body,
+        config
+      );
+    } catch (error) {
+      console.error(error, "Error creating issue");
+    }
   };
 
   return (
@@ -82,7 +87,7 @@ const Header = () => {
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
-            <Button>Create</Button>
+            <Button onClick={addIssue}>Add Issue</Button>
           </React.Fragment>
         }
       >
@@ -93,7 +98,6 @@ const Header = () => {
           value={issueName}
           onChange={(e) => onChange(e)}
           required
-          small={true}
         ></Input>
       </Modal>
       <Modal
@@ -114,7 +118,6 @@ const Header = () => {
           value={invite}
           onChange={(e) => onChange(e)}
           required
-          small={true}
         ></Input>
       </Modal>
       <NavLink to="#" className="menu-bars">
@@ -129,17 +132,11 @@ const Header = () => {
       <nav className={sideBar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showSideBar}>
           <li>
-            <NavLink to="/file" className="file-browser">
-              <FiFile className="icons" />
-              <p>File Browser</p>
-            </NavLink>
+            <HeaderChat name={"File Browser"} Icon={FiFile} />
           </li>
 
           <li>
-            <NavLink to="/saved" className="file-browser">
-              <BsBookmark className="icons" />
-              <p>Saved Items</p>
-            </NavLink>
+            <HeaderChat name={"Saved Items"} Icon={BsBookmark} />
           </li>
 
           <li>
@@ -149,7 +146,11 @@ const Header = () => {
             </NavLink>
             <div className="header_chats">
               {issues.map((issue) => (
-                <HeaderChat name={issue.name} id={issue.id} />
+                <HeaderChat
+                  key={issue.id}
+                  name={issue.issueName}
+                  id={issue.id}
+                />
               ))}
             </div>
           </li>

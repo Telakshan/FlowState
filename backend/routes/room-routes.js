@@ -6,8 +6,8 @@ const router = express.Router();
 router.get("/:roomId", roomControllers.getMessages);
 
 router.post(
-  "/createroom",
-  [body("name", "Name is required").not().isEmpty()],
+  "/createissue",
+  [body("issueName", "Issue name is required").not().isEmpty()],
   roomControllers.createRoom
 );
 
@@ -16,5 +16,7 @@ router.post(
   [body("message").not().isEmpty()],
   roomControllers.sendMessage
 );
+
+router.get("/", roomControllers.getIssueList);
 
 module.exports = router;

@@ -11,10 +11,10 @@ const createRoom = async (req, res, next) => {
     return next(new HttpError("Cannot create room", 422));
   }
 
-  const { name } = req.body;
+  const { issueName } = req.body;
 
   const createdRoom = new Room({
-    name,
+    issueName,
   });
 
   try {
@@ -55,6 +55,7 @@ const sendMessage = async (req, res, next) => {
   try {
     room = await Room.findById(roomId);
     const user = await User.findById(req.body.userId).select("-password");
+    console.log(user);
     newMessage = {
       name: user.name,
       text: req.body.message,
@@ -64,7 +65,7 @@ const sendMessage = async (req, res, next) => {
   } catch (error) {
     return next(new HttpError("Cannot send message", 422));
   }
-  res.status(200).json({msg: 'Message sent'});
+  res.status(200).json({ msg: "Message sent" });
 };
 
 const getMessages = async (req, res, next) => {
@@ -83,12 +84,49 @@ const getMessages = async (req, res, next) => {
     return next(new HttpError("Cannot find room", 422));
   }
   res.status(200).json({
+    name: room.issueName,
     messages: room.messages.map((message) =>
       message.toObject({ getters: true })
     ),
+    
   });
 };
 
+// const getRoomDetails = async (req, res, next) => {
+//   const errors = validationResult(req);
+//   const roomId = req.params.roomId;
+
+//   if (!errors.isEmpty()) {
+//     return next(new HttpError("Cannot send message, Error#1", 422));
+//   }
+
+//   let room;
+
+//   try {
+//     room = await Room.findById(roomId);
+//   } catch (error) {
+//     return next(new HttpError('Cannot find room', 422));
+//   }
+
+//   res.status(200).json({
+//     room: 
+//   })
+// }
+
+const getIssueList = async (req, res, next) => {
+  const errors = validationResult(req);
+  let issues;
+  try {
+    issues = await Room.find({});
+  } catch (error) {
+    return next(new HttpError("Cannot find any issues", 500));
+  }
+  res.status(200).json({
+    issues: issues.map((issue) => issue.toObject({ getters: true })),
+  });
+};
+
+exports.getIssueList = getIssueList;
 exports.getMessages = getMessages;
 exports.createRoom = createRoom;
 exports.deleteRoom = deleteRoom;

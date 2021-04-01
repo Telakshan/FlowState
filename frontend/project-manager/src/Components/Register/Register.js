@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import Input from "../Input/Input";
+import Modal from "../Modal/Modal";
 import Loading from "../Loading/Loading";
 
 import "./Register.scss";
@@ -16,6 +17,7 @@ const Register = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const { name, email, password } = formData;
 
@@ -35,7 +37,7 @@ const Register = () => {
     try {
       const responseData = await axios.post(
         "http://localhost:5000/api/user/register",
-        body, 
+        body,
         config
       );
       auth.login(responseData.data.userId, responseData.data.token);
@@ -45,15 +47,30 @@ const Register = () => {
     }
   };
 
+  const cancelModal = () => {
+    setError(false);
+  };
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+
   return (
     <div className="sign-up">
       {isLoading ? <Loading /> : null}
       <MdAccountCircle className="user-icon" />
       <h2 className="title">Sign up</h2>
-
+      {error && (
+        <Modal
+          // className="small-modal"
+          show={setError}
+          header="Register in Error"
+          onCancel={cancelModal}
+          footer={<Button onClick={cancelModal}>Close</Button>}
+        >
+          Cannot Register. Please try again
+        </Modal>
+      )}
       <form onSubmit={authSubmit}>
         <Input
           name="name"
