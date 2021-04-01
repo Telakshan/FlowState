@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { NavLink, BrowserRouter as Router } from "react-router-dom";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { MdAccountCircle } from "react-icons/md";
@@ -6,6 +6,7 @@ import { FiFile } from "react-icons/fi";
 import { BsBookmark } from "react-icons/bs";
 import Input from "../Input/Input";
 import axios from "axios";
+import {AuthContext} from '../../Context/AuthContext';
 import { IoMdArrowDropdown, IoMdAdd } from "react-icons/io";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import Button from "../Button/Button";
@@ -13,6 +14,11 @@ import Dropdown from "../Dropdown/Dropdown";
 import "./Header.scss";
 import Modal from "../Modal/Modal";
 import HeaderChat from "../HeaderChat/HeaderChat";
+import Pusher from 'pusher-js';
+
+const pusher = new Pusher('5001586ab8cef267004c', {
+  cluster: 'us2'
+});
 
 const Header = () => {
   const wrapper = useRef(null);
@@ -23,6 +29,7 @@ const Header = () => {
   const [issues, setIssue] = useState([]);
   const [issueName, setIssueName] = useState("");
   const [invite, setInvite] = useState("");
+  const auth = useContext(AuthContext);
 
   const showSideBar = () => setSideBar(!sideBar);
 
@@ -35,6 +42,11 @@ const Header = () => {
 
   useEffect(() => {
     getIssueList();
+
+    const channel = pusher.subscribe('issues');
+    channel.bind('newIssue', function(data){
+      getIssueList();
+    })
   }, []);
 
   const handleClickOutside = (event) => {
@@ -72,6 +84,7 @@ const Header = () => {
         body,
         config
       );
+      setShowModal(false);
     } catch (error) {
       console.error(error, "Error creating issue");
     }

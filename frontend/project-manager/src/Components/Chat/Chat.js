@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
@@ -12,33 +12,41 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import Modal from "../Modal/Modal";
 import Button from "../Button/Button";
 import SearchModal from "../Search/SearchModal";
+import Pusher from "pusher-js";
+
+const pusher = new Pusher("5001586ab8cef267004c", {
+  cluster: "us2",
+});
 
 const Chat = () => {
-
   const { roomId } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
   const [showAddUserModal, setAddShowUserModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
-  const [roomDetails, setRoomDetails] = useState('');
+  const [roomDetails, setRoomDetails] = useState("");
   const [roomMessages, setRoomMessages] = useState([]);
+  const fieldRef = useRef(null);
 
-  const getMessages =  () => {
+  const getMessages = () => {
     axios.get(`http://localhost:5000/api/room/${roomId}`).then((res) => {
       setRoomMessages(res.data.messages);
+      setRoomDetails(res.data.name);
     });
-    
   };
 
-  const getRoomDetails = () => {
-    axios.get(`http://localhost:5000/api/room/${roomId}`).then((res) => {
-      setRoomDetails(res.data.name);
-    })
-  }
-
   useEffect(() => {
-    getMessages();
-    getRoomDetails();
+    if (roomId) {
+      getMessages();
+
+      const channel = pusher.subscribe("room");
+      channel.bind("newMessage", function (data) {
+        getMessages();
+      });
+    }
+    // if (fieldRef && fieldRef.current) {
+    //   fieldRef.current.scrollIntoView();
+    // }
   }, [roomId]);
 
   const cancelModal = () => {
@@ -47,10 +55,8 @@ const Chat = () => {
     setAddShowUserModal(false);
   };
 
-
   return (
     <div className="chat">
- 
       <Modal
         className="small-modal"
         show={showUserModal}
@@ -104,7 +110,7 @@ const Chat = () => {
         </div>
       </div>
 
-      <div className="chat-body">
+      <div className="chat-body" ref={fieldRef}>
         <div className="center-div">
           {roomMessages.map(({ text, name, id, date }) => (
             <Message key={id} message={text} user={name} date={date} />

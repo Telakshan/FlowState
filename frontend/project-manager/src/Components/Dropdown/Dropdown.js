@@ -7,11 +7,18 @@ import "./Dropdown.scss";
 const Dropdown = () => {
   const auth = useContext(AuthContext);
   let dropDown;
+
+  
   if (auth.token) {
     dropDown = (
-      <Link to="/login" className="link">
-        My Account
-      </Link>
+      <React.Fragment>
+        <Link to="/login" className="link">
+          My Account
+        </Link>
+        <Link to="/#" className="link">
+          Log out
+        </Link>
+      </React.Fragment>
     );
   } else {
     dropDown = (

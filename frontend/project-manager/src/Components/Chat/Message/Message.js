@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "react-moment";
 
 import "./Message.scss";
 
@@ -8,7 +9,9 @@ const Message = ({ message, timestamp, user, date }) => {
       <div className="message-info">
         <h4>
           {user}
-          <span className="message-timestamp">{date}</span>
+          <span className="message-timestamp">
+            <Moment format="MM/DD/YYYY">{date}</Moment>
+          </span>
         </h4>
 
         <p>{message}</p>

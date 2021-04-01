@@ -12,7 +12,7 @@ const ChatInput = ({ roomId }) => {
 
   const sendMessage = async (event) => {
     event.preventDefault();
-  
+
     const userId = auth.userId;
     const config = {
       headers: {
@@ -43,8 +43,9 @@ const ChatInput = ({ roomId }) => {
         onChange={(e) => setMessage(e.target.value)}
         required
       />
-      {/* <IoIosSend className="icon" onClick={sendMessage} /> */}
-      <button type="submit">Send</button>
+      <button type="submit" className="send">
+        Send
+      </button>
       <GrAttachment className="attachment" />
     </form>
   );

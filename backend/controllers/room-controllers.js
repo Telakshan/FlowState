@@ -55,7 +55,6 @@ const sendMessage = async (req, res, next) => {
   try {
     room = await Room.findById(roomId);
     const user = await User.findById(req.body.userId).select("-password");
-    console.log(user);
     newMessage = {
       name: user.name,
       text: req.body.message,

@@ -2,8 +2,20 @@
   display: flex;
   border-radius: 5px;
   margin: 0 auto auto;
-  background-color: antiquewhite;
+  background-color: #02024a;
   border: 1px solid lightgrey;
+
+  .send{
+    background-color: #02024a;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+  }
+
+  button:hover{
+    cursor: pointer;
+    opacity: 0.7;
+  }
 
   .input {
     border: none;
@@ -12,23 +24,11 @@
     padding-left: 5px;
   }
 
-  .icon {
-    font-size: 24px;
-    margin-left: 5px;
-    margin-top: 16px;
-    border-radius: 50%;
-    padding: 4px;
-  }
-
-  .icon:hover {
-    cursor: pointer;
-    background-color: lightgrey;
-  }
-
   .attachment {
+    color: #fff;
     font-size: 18px;
     margin-left: 5px;
-    margin-top: 17px;
+    margin-top: 10px;
     margin-right: 5px;
     border-radius: 50%;
     padding: 6px;
@@ -37,5 +37,6 @@
   .attachment:hover {
     cursor: pointer;
     background-color: lightgrey;
+    color: black;
   }
 }
