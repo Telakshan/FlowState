@@ -4,6 +4,7 @@ import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { BsCameraVideo } from "react-icons/bs";
 import { FaTasks } from "react-icons/fa";
 import { AiFillCheckCircle } from "react-icons/ai";
+import { GrUserAdd } from "react-icons/gr";
 import Button from "../../Components/Button/Button";
 
 import "./Landing.scss";
@@ -25,20 +26,20 @@ const Landing = () => {
       <div className="info-section">
         <div className="card">
           <AiOutlineUsergroupAdd className="connect" />
-          <h3>Connect with your team</h3>
+          <h3>Connect with your team.</h3>
           <p>
             <AiFillCheckCircle className="check" />
-            Stay in contact with your team members
+            Stay in contact with your team. Communicate with your team through chat. 
           </p>
         </div>
 
         <div className="card">
           <BsCameraVideo className="connect" />
-          <h3>Connect on a call</h3>
+          <h3>Connect on a call (Coming soon)</h3>
           <p>
             <AiFillCheckCircle className="check" />
             Effortlessly connect with yout team members while working on
-            projects
+            projects.
           </p>
         </div>
 

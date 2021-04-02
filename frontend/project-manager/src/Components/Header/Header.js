@@ -174,7 +174,7 @@ const Header = () => {
           <li>
             <NavLink to="/#" className="file-browser">
               <IoMdArrowDropdown className="header-icon" />
-              <h3>Issues</h3>
+              <h3>Channels</h3>
             </NavLink>
             <div className="header_chats">
               {auth.isLoggedIn ? (
@@ -186,7 +186,7 @@ const Header = () => {
                   />
                 ))
               ) : (
-                <p>No Issues added</p>
+                <p>No channels added</p>
               )}
             </div>
           </li>
