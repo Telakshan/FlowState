@@ -14,11 +14,11 @@ import Dropdown from "../Dropdown/Dropdown";
 import "./Header.scss";
 import Modal from "../Modal/Modal";
 import HeaderChat from "../HeaderChat/HeaderChat";
-import Pusher from "pusher-js";
+// import Pusher from "pusher-js";
 
-const pusher = new Pusher("5001586ab8cef267004c", {
-  cluster: "us2",
-});
+// const pusher = new Pusher("5001586ab8cef267004c", {
+//   cluster: "us2",
+// });
 
 const Header = () => {
   const wrapper = useRef(null);
@@ -43,10 +43,10 @@ const Header = () => {
   useEffect(() => {
     getIssueList();
 
-    const channel = pusher.subscribe("issues");
-    channel.bind("newIssue", function (data) {
-      getIssueList();
-    });
+    // const channel = pusher.subscribe("issues");
+    // channel.bind("newIssue", function (data) {
+    //   getIssueList();
+    // });
   }, []);
 
   const handleClickOutside = (event) => {
@@ -103,10 +103,10 @@ const Header = () => {
     const body = JSON.stringify({ inviteEmail });
     try {
       await axios.post("http://localhost:5000/api/invite", body, config);
+      setShowInviteModal(false);
     } catch (error) {
       console.error(error, "Cannot send message");
     }
-    setShowInviteModal(false);
   };
 
   return (
@@ -177,7 +177,7 @@ const Header = () => {
               <h3>Channels</h3>
             </NavLink>
             <div className="header_chats">
-              {auth.isLoggedIn ? (
+              {auth.isLoggedIn && issues.length !== 0 ? (
                 issues.map((issue) => (
                   <HeaderChat
                     key={issue.id}

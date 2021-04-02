@@ -66,11 +66,15 @@
     margin-left: 80px;
     font-size: 20px;
     color: #fff;
+
+    &:hover{
+      opacity: 0.7;
+    }
   }
 
-  .file-browser > .add:hover {
-    opacity: 0.7;
-  }
+  // .file-browser > .add:hover {
+  //   opacity: 0.7;
+  // }
 
   .menu-bars {
     margin-left: 2rem;

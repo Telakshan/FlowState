@@ -8,14 +8,13 @@ const Dropdown = () => {
   const auth = useContext(AuthContext);
   let dropDown;
 
-  
   if (auth.token) {
     dropDown = (
       <React.Fragment>
         <Link to="/login" className="link">
           My Account
         </Link>
-        <Link to="/#" className="link">
+        <Link to="/" className="link" onClick={auth.logout}>
           Log out
         </Link>
       </React.Fragment>

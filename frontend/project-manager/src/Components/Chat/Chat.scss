@@ -47,8 +47,10 @@
     margin: 0px auto auto;
     padding: 0px;
     height: 75vh;
-    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
     border: 1px solid lightgray;
+    flex-direction: column-reverse;
 
     .center-div {
       width: 180vh;

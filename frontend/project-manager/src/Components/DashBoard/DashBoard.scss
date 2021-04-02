@@ -1,8 +1,18 @@
 .dashboard{
     color: black;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 50px;
     text-align: center;
     position: relative;
+
+    .arrow{
+        font-size: 128px;
+    }
+
+    .menu{
+        margin: 0px 10px;
+        font-size: 28px;
+    }
+   
     
 }

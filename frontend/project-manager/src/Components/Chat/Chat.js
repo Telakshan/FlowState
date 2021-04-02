@@ -12,11 +12,11 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import Modal from "../Modal/Modal";
 import Button from "../Button/Button";
 import SearchModal from "../Search/SearchModal";
-import Pusher from "pusher-js";
+// import Pusher from "pusher-js";
 
-const pusher = new Pusher("5001586ab8cef267004c", {
-  cluster: "us2",
-});
+// const pusher = new Pusher("5001586ab8cef267004c", {
+//   cluster: "us2",
+// });
 
 const Chat = () => {
   const { roomId } = useParams();
@@ -38,10 +38,10 @@ const Chat = () => {
     if (roomId) {
       getMessages();
 
-      const channel = pusher.subscribe("room");
-      channel.bind("newMessage", function (data) {
-        getMessages();
-      });
+      // const channel = pusher.subscribe("room");
+      // channel.bind("newMessage", function (data) {
+      //   getMessages();
+      // });
     }
   }, [roomId]);
 

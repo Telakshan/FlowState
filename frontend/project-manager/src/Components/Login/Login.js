@@ -4,7 +4,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import Loading from "../Loading/Loading";
 import Chat from "../Chat/Chat";
-import DashBoard from "../DashBoard/DashBoard";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import { Link } from "react-router-dom";
@@ -63,10 +62,6 @@ const Login = () => {
     setError(false);
   };
 
-  if (auth.isLoggedIn) {
-    return <Chat />;
-  }
-
   return (
     <div className="log-in">
       {isLoading ? <Loading /> : null}
@@ -74,13 +69,12 @@ const Login = () => {
       <h2 className="title">Log in</h2>
       {error && (
         <Modal
-          // className="small-modal"
           show={setError}
           header="Log in Error"
           onCancel={cancelModal}
           footer={<Button onClick={cancelModal}>Close</Button>}
         >
-          Cannot log you in. Please try again
+          Invalid Credentials. Please try again
         </Modal>
       )}
       <form onSubmit={submitLogin}>
