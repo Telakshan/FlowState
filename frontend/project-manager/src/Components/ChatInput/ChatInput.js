@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { GrAttachment } from "react-icons/gr";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
-import { IoIosSend } from "react-icons/io";
+import api from '../url';
 
 import "./ChatInput.scss";
 
@@ -23,7 +23,7 @@ const ChatInput = ({ roomId }) => {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/room/message/${roomId}`,
+        `${api.roomAPI}message/${roomId}`,
         body,
         config
       );

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { NavLink, BrowserRouter as Router } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { MdAccountCircle } from "react-icons/md";
 import { FiFile } from "react-icons/fi";
-import { BsBookmark } from "react-icons/bs"; 
+import { BsBookmark } from "react-icons/bs";
 import Input from "../Input/Input";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
@@ -14,11 +14,12 @@ import Dropdown from "../Dropdown/Dropdown";
 import "./Header.scss";
 import Modal from "../Modal/Modal";
 import HeaderChat from "../HeaderChat/HeaderChat";
-// import Pusher from "pusher-js";
+import Pusher from "pusher-js";
+import api from "../url";
 
-// const pusher = new Pusher("5001586ab8cef267004c", {
-//   cluster: "us2",
-// });
+const pusher = new Pusher("5001586ab8cef267004c", {
+  cluster: "us2",
+});
 
 const Header = () => {
   const wrapper = useRef(null);
@@ -41,13 +42,19 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    const getIssueList = () => {
+      axios.get(api.roomAPI).then((res) => {
+        setIssue(res.data.issues);
+      });
+    };
+
     getIssueList();
 
-    // const channel = pusher.subscribe("issues");
-    // channel.bind("newIssue", function (data) {
-    //   getIssueList();
-    // });
-  }, []);
+    const channel = pusher.subscribe("issues");
+    channel.bind("newIssue", function (data) {
+      getIssueList();
+    });
+  }, [setIssue]);
 
   const handleClickOutside = (event) => {
     if (wrapper.current && !wrapper.current.contains(event.target)) {
@@ -69,12 +76,6 @@ const Header = () => {
     setInvite(e.target.value);
   };
 
-  const getIssueList = () => {
-    axios.get("http://localhost:5000/api/room/").then((res) => {
-      setIssue(res.data.issues);
-    });
-  };
-
   const addIssue = async () => {
     const config = {
       headers: {
@@ -83,11 +84,8 @@ const Header = () => {
     };
     const body = JSON.stringify({ issueName });
     try {
-      await axios.post(
-        "http://localhost:5000/api/room/createissue",
-        body,
-        config
-      );
+      await axios.post(`${api.roomAPI}createissue`, body, config);
+      console.log(`From console.log: ${api.roomAPI}createissue`);
       setShowModal(false);
     } catch (error) {
       console.error(error, "Error creating issue");
@@ -102,7 +100,7 @@ const Header = () => {
     };
     const body = JSON.stringify({ inviteEmail });
     try {
-      await axios.post("http://localhost:5000/api/invite", body, config);
+      await axios.post(api.inviteAPI, body, config);
       setShowInviteModal(false);
     } catch (error) {
       console.error(error, "Cannot send message");

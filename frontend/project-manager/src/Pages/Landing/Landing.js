@@ -1,10 +1,9 @@
-import React, { Fragment } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { BsCameraVideo } from "react-icons/bs";
 import { FaTasks } from "react-icons/fa";
 import { AiFillCheckCircle } from "react-icons/ai";
-import { GrUserAdd } from "react-icons/gr";
 import Button from "../../Components/Button/Button";
 
 import "./Landing.scss";

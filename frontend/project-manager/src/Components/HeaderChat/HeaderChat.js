@@ -1,10 +1,5 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { BsCaretRight } from "react-icons/bs";
-import { HiMenuAlt2 } from "react-icons/hi";
-import { MdAccountCircle } from "react-icons/md";
-import { FiFile } from "react-icons/fi";
-import { BsBookmark } from "react-icons/bs";
 
 import "./HeaderChat.scss";
 

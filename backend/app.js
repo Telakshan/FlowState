@@ -15,27 +15,27 @@ const pusher = new Pusher(pusherConfig);
 
 connectDB();
 
-// mongoose.connection.once("open", () => {
-//   console.log(`MongoDB connected...`);
-//   try {
-//     const changeStream = mongoose.connection.collection("rooms").watch();
-//     changeStream.on("change", (change) => {
-//       if (change.operationType === "insert") {
-//         pusher.trigger("issues", "newIssue", {
-//           'change': change,
-//         });
-//       } else if (change.operationType === "update") {
-//         pusher.trigger("room", "newMessage", {
-//           'change': change,
-//         });
-//       } else {
-//         console.log("Error triggering pusher");
-//       }
-//     });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
+mongoose.connection.once("open", () => {
+  console.log(`MongoDB connected...`);
+  try {
+    const changeStream = mongoose.connection.collection("rooms").watch();
+    changeStream.on("change", (change) => {
+      if (change.operationType === "insert") {
+        pusher.trigger("issues", "newIssue", {
+          'change': change,
+        });
+      } else if (change.operationType === "update") {
+        pusher.trigger("room", "newMessage", {
+          'change': change,
+        });
+      } else {
+        console.log("Error triggering pusher");
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 app.use(express.json({ extended: false }));
 

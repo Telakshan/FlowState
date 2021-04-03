@@ -7,6 +7,7 @@ import axios from "axios";
 import Input from "../Input/Input";
 import Modal from "../Modal/Modal";
 import Loading from "../Loading/Loading";
+import api from '../url';
 
 import "./Register.scss";
 
@@ -36,7 +37,7 @@ const Register = () => {
     setIsLoading(true);
     try {
       const responseData = await axios.post(
-        "http://localhost:5000/api/user/register",
+        `${api.userAPI}register`,
         body,
         config
       );

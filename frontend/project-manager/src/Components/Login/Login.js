@@ -3,13 +3,12 @@ import { MdAccountCircle } from "react-icons/md";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import Loading from "../Loading/Loading";
-import Chat from "../Chat/Chat";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import { Link } from "react-router-dom";
 
 import Input from "../Input/Input";
-
+import api from "../url";
 import "./Login.scss";
 
 const Login = () => {
@@ -37,7 +36,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       const responseData = await axios.post(
-        "http://localhost:5000/api/user/login",
+        `${api.userAPI}login`,
         body,
         config
       );

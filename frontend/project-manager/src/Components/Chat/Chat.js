@@ -12,11 +12,12 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import Modal from "../Modal/Modal";
 import Button from "../Button/Button";
 import SearchModal from "../Search/SearchModal";
-// import Pusher from "pusher-js";
+import Pusher from "pusher-js";
+import api from '../url';
 
-// const pusher = new Pusher("5001586ab8cef267004c", {
-//   cluster: "us2",
-// });
+const pusher = new Pusher("5001586ab8cef267004c", {
+  cluster: "us2",
+});
 
 const Chat = () => {
   const { roomId } = useParams();
@@ -27,23 +28,25 @@ const Chat = () => {
   const [roomDetails, setRoomDetails] = useState("");
   const [roomMessages, setRoomMessages] = useState([]);
 
-  const getMessages = () => {
-    axios.get(`http://localhost:5000/api/room/${roomId}`).then((res) => {
-      setRoomMessages(res.data.messages);
-      setRoomDetails(res.data.name);
-    });
-  };
+ 
 
   useEffect(() => {
     if (roomId) {
+
+      const getMessages = () => {
+        axios.get(`${api.roomAPI}${roomId}`).then((res) => {
+          setRoomMessages(res.data.messages);
+          setRoomDetails(res.data.name);
+        });
+      };
       getMessages();
 
-      // const channel = pusher.subscribe("room");
-      // channel.bind("newMessage", function (data) {
-      //   getMessages();
-      // });
+      const channel = pusher.subscribe("room");
+      channel.bind("newMessage", function (data) {
+        getMessages();
+      });
     }
-  }, [roomId]);
+  }, [roomId, setRoomMessages, setRoomDetails]);
 
   const cancelModal = () => {
     setShowModal(false);

@@ -1,29 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../../Context/AuthContext";
+import React from "react";
 import { BsArrowUpLeft } from "react-icons/bs";
 import { HiMenuAlt2 } from "react-icons/hi";
-
-import axios from "axios";
 
 import "./DashBoard.scss";
 
 const DashBoard = () => {
-  const auth = useContext(AuthContext);
-  const [users, setUsers] = useState([]);
-  const [channels, setChannels] = useState([]);
-
-  let username;
-  useEffect(() => {
-    getUsers();
-    username = users.find((user) => user.id === auth.userId);
-  }, []);
-
-  const getUsers = () => {
-    axios.get("http://localhost:5000/api/user/").then((res) => {
-      setUsers(res.data.users);
-    });
-  };
-
   return (
     <div className="dashboard">
       <h1 className="welcome">Welcome to Flow State</h1>
