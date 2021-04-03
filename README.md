@@ -14,7 +14,7 @@ https://flowstate-web.netlify.app/
 
 * Realtime sending and receiving of messages powered by Pusher.
 
-* Invite team members through the application's built in email feauture powered by Send Grid.
+* Invite team members through the application's built in email feature powered by Send Grid.
 
 * All the messages are saved in the database.
 
