@@ -24,4 +24,4 @@ https://flowstate-web.netlify.app/
 
 #### I'm planning on adding more features such as video conferencing and file upload.
 
-### More feautures soon to come.
+### More features soon to come.
