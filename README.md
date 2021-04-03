@@ -1,5 +1,6 @@
 # FlowState
-Project management application where teams can chat with each other and collaborate. https://flowstate-thilak.netlify.app/
+Project management application where teams can chat with each other and collaborate.
+https://flowstate-web.netlify.app/
 
 #### Full Stack MERN Project Management application.
 
