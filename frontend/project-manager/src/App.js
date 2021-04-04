@@ -1,9 +1,8 @@
-import { useState, useCallback } from "react";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import Header from "./Components/Header/Header";
 import Landing from "./Pages/Landing/Landing";
-import DashBoard from './Components/DashBoard/DashBoard';
+import DashBoard from "./Components/DashBoard/DashBoard";
 import { AuthContext } from "./Context/AuthContext";
 import Chat from "./Components/Chat/Chat";
 import {
@@ -12,27 +11,17 @@ import {
   Redirect,
   BrowserRouter as Router,
 } from "react-router-dom";
+import { useAuth } from "./hooks/auth-hooks";
 
 function App() {
-  const [token, setToken] = useState(false);
-  const [userId, setUserId] = useState(null);
-
-  const login = useCallback((uid, token) => {
-    setToken(token);
-    setUserId(uid);
-  }, []);
-
-  const logout = useCallback(() => {
-    setToken(null);
-    setUserId(null);
-  }, []);
+  const { token, login, logout, userId } = useAuth();
 
   let routes;
 
   if (token) {
     routes = (
       <Switch>
-         <Route exact path='/' component={DashBoard}/> 
+        <Route exact path="/" component={DashBoard} />
         <Route path="/room/:roomId" component={Chat} />
         <Redirect to="/" />
       </Switch>
