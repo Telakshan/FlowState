@@ -5,15 +5,13 @@ import { BsSearch } from "react-icons/bs";
 import { GrAttachment } from "react-icons/gr";
 import { FiUsers } from "react-icons/fi";
 import Message from "./Message/Message";
-import { AiOutlineUserAdd } from "react-icons/ai";
 import "./Chat.scss";
 import ChatInput from "../ChatInput/ChatInput";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Modal from "../Modal/Modal";
-import Button from "../Button/Button";
 import SearchModal from "../Search/SearchModal";
 import Pusher from "pusher-js";
-import api from '../url';
+import api from "../url";
 
 const pusher = new Pusher("5001586ab8cef267004c", {
   cluster: "us2",
@@ -23,16 +21,19 @@ const Chat = () => {
   const { roomId } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
-  const [showAddUserModal, setAddShowUserModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
   const [roomDetails, setRoomDetails] = useState("");
   const [roomMessages, setRoomMessages] = useState([]);
+  const [users, setUsers] = useState([]);
 
- 
+  const getUsers = () => {
+    axios.get(`${api.userAPI}`).then((res) => {
+      setUsers(res.data.users);
+    });
+  };
 
   useEffect(() => {
     if (roomId) {
-
       const getMessages = () => {
         axios.get(`${api.roomAPI}${roomId}`).then((res) => {
           setRoomMessages(res.data.messages);
@@ -40,6 +41,8 @@ const Chat = () => {
         });
       };
       getMessages();
+
+      getUsers();
 
       const channel = pusher.subscribe("room");
       channel.bind("newMessage", function (data) {
@@ -51,8 +54,12 @@ const Chat = () => {
   const cancelModal = () => {
     setShowModal(false);
     setShowUserModal(false);
-    setAddShowUserModal(false);
+   
   };
+
+  const style ={
+    marginTop: "20px"
+  }
 
   return (
     <div className="chat">
@@ -62,29 +69,14 @@ const Chat = () => {
         onCancel={cancelModal}
         header="Show Users"
         footerClass="place-item__modal-actions"
-        footer={
-          <React.Fragment>
-            <Button>Create</Button>
-          </React.Fragment>
-        }
       >
-        Users
+        <ul>
+          {users.map((user) => (
+            <li style={style} key={user.id}>{user.name}, {user.email}</li>
+          ))}
+        </ul>
       </Modal>
 
-      <Modal
-        className="small-modal"
-        show={showAddUserModal}
-        onCancel={cancelModal}
-        header="Invite Users"
-        footerClass="place-item__modal-actions"
-        footer={
-          <React.Fragment>
-            <Button>Invite User</Button>
-          </React.Fragment>
-        }
-      >
-        Users
-      </Modal>
       <div className="header">
         <div className="header-info">
           <h2>{roomDetails}</h2>
@@ -93,9 +85,6 @@ const Chat = () => {
         <div className="header-right">
           <GrAttachment onClick={() => setShowModal(!showModal)} />
           <FiUsers onClick={() => setShowUserModal(!showUserModal)} />
-          <AiOutlineUserAdd
-            onClick={() => setAddShowUserModal(!showAddUserModal)}
-          />
           <BsSearch onClick={() => setSearchModal(!searchModal)} />
           {searchModal ? (
             <React.Fragment>
